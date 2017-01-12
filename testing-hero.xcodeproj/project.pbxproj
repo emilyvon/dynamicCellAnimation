@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		375181755E104B2A22C7BAA0 /* Pods_testing_hero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9568F5BC46969D7613F6499 /* Pods_testing_hero.framework */; };
+		EB9CEE9D1E27164E009C16EB /* WeekviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9CEE9C1E27164E009C16EB /* WeekviewTableViewCell.swift */; };
 		EBA232B01E248BCB003C7846 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA232AF1E248BCB003C7846 /* AppDelegate.swift */; };
 		EBA232B21E248BCB003C7846 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA232B11E248BCB003C7846 /* ViewController.swift */; };
 		EBA232B51E248BCB003C7846 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBA232B31E248BCB003C7846 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 		83E3503D762C9C883F96F16D /* Pods-testing-hero.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testing-hero.release.xcconfig"; path = "Pods/Target Support Files/Pods-testing-hero/Pods-testing-hero.release.xcconfig"; sourceTree = "<group>"; };
 		B9568F5BC46969D7613F6499 /* Pods_testing_hero.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_testing_hero.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDE5E2785AFD78075E0F4488 /* Pods-testing-hero.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testing-hero.debug.xcconfig"; path = "Pods/Target Support Files/Pods-testing-hero/Pods-testing-hero.debug.xcconfig"; sourceTree = "<group>"; };
+		EB9CEE9C1E27164E009C16EB /* WeekviewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeekviewTableViewCell.swift; sourceTree = "<group>"; };
 		EBA232AC1E248BCB003C7846 /* testing-hero.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "testing-hero.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBA232AF1E248BCB003C7846 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBA232B11E248BCB003C7846 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				EBA232B61E248BCB003C7846 /* Assets.xcassets */,
 				EBA232B81E248BCB003C7846 /* LaunchScreen.storyboard */,
 				EBA232BB1E248BCB003C7846 /* Info.plist */,
+				EB9CEE9C1E27164E009C16EB /* WeekviewTableViewCell.swift */,
 			);
 			path = "testing-hero";
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB9CEE9D1E27164E009C16EB /* WeekviewTableViewCell.swift in Sources */,
 				EBA232C21E249005003C7846 /* SecondViewController.swift in Sources */,
 				EBA232B21E248BCB003C7846 /* ViewController.swift in Sources */,
 				EBA232C41E24A96E003C7846 /* PopAnimator.swift in Sources */,

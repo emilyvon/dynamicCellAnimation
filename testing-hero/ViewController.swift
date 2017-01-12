@@ -46,6 +46,10 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        tableView.layoutMargins = UIEdgeInsets.zero
+        tableView.separatorStyle = .none
+        
+        
     }
     
     
@@ -63,48 +67,25 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
         
-        cell.backgroundColor = uicolorArr[indexPath.row]
-        cell.textLabel?.text = "\(indexPath.row)"
-        cell.textLabel?.backgroundColor = UIColor.clear
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WeekviewCell") as! WeekviewTableViewCell
         cell.selectionStyle = .none
+        
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        print("heightForRow ✅ indexPath.row: \(indexPath.row)")
-        
         if currentSelectedCell != -1 && currentSelectedCell == indexPath.row && currentSelectedCell != previousSelectedCell {
-            print("self.view.frame.size.height * 0.5: \(self.view.frame.size.height * 0.5)")
-            return self.view.frame.size.height * 0.5
+            return 343
         }
-            
         else if isSameSelectedCell && currentSelectedCell == indexPath.row {
-            print("self.view.frame.size.height: \(self.view.frame.size.height)")
             return self.view.frame.size.height
         }
-            //
-            //        else if currentSelectedCell == previousSelectedCell {
-            //            return self.view.frame.size.height
-            //        }
             
-            //        if previousSelectedCell == currentSelectedCell {
-            //
-            //            if currentSelectedCell == -1 {
-            //                return 200
-            //            } else {
-            //                return self.view.frame.size.height * 0.8
-            //            }
-            //
-            //        } else {
-            //            return self.view.frame.size.height * 0.5
-            //        }
         else {
-            print("200")
-            return 200
+            return 130
         }
     }
     
@@ -148,7 +129,6 @@ extension ViewController: UITableViewDelegate {
             tableView.endUpdates()
             
             tableView.scrollToRow(at: IndexPath(row: indexPath.row, section: 0), at: UITableViewScrollPosition.middle, animated: true)
-            
         }
             
         else {
@@ -165,8 +145,6 @@ extension ViewController: UITableViewDelegate {
                     secondVC.transitioningDelegate = self
                     secondVC.passedString = "hello?"
                     self.present(secondVC, animated: true, completion: nil)
-                    
-                    
                 })
                 
                 tableView.beginUpdates()
@@ -174,89 +152,10 @@ extension ViewController: UITableViewDelegate {
                 
                 tableView.scrollToRow(at: IndexPath(row: indexPath.row, section: 0), at: UITableViewScrollPosition.middle, animated: true)
                 
-                
-                
-                
-                
-                
-                
             }
-            
-            /*
-             UIView.animate(withDuration: 3.0) {
-             
-             selectedCell.contentView.layoutIfNeeded()
-             }
-             
-             
-             tableView.beginUpdates()
-             tableView.endUpdates()
-             
-             tableView.scrollToRow(at: IndexPath(row: indexPath.row, section: 0), at: UITableViewScrollPosition.middle, animated: true)
-             */
         }
         
-        
         previousSelectedCell = currentSelectedCell
-        
-        /*
-         for index in 0...6 {
-         if index == selctedIndexRow {
-         print("= \(index)")
-         UIView.animate(withDuration: 4.0, animations: {
-         selectedCell.backgroundColor = UIColor.randomColor()
-         }, completion: { (result) in
-         
-         })
-         
-         }
-         else if index < selctedIndexRow {
-         print("< \(index)")
-         UIView.animate(withDuration: 4.0, animations: {
-         selectedCell.center.y -= 100
-         }, completion: { (result) in
-         
-         })
-         
-         
-         }
-         //            else {
-         //                print("> \(index)")
-         //                selectedCell.center.y += 100
-         //            }
-         
-         }
-         
-         
-         
-         */
-        
-        //
-        //        for index in 0...6 {
-        //            let selectedCell = tableView.cellForRow(at: IndexPath(row: index, section: 0))!
-        //
-        //            if index > indexPath.row {
-        //
-        //                UIView.animate(withDuration: 4.0, animations: {
-        //                    if index > indexPath.row {
-        //                    selectedCell.center.y += 100
-        //                    } else {
-        //                        selectedCell.center.y -= 100
-        //                    }
-        //                }, completion: { (result) in
-        //
-        //                })
-        //
-        //            }
-        //        }
-        
-        
-        
-        
-        //        let secondVC = storyboard!.instantiateViewController(withIdentifier: "SecondViewController") as! SecondViewController
-        //        secondVC.transitioningDelegate = self
-        //        secondVC.passedString = "hello?"
-        //        present(secondVC, animated: true, completion: nil)
     }
     
     
