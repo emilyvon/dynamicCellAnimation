@@ -17,6 +17,7 @@
 		EBA232C21E249005003C7846 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA232C11E249005003C7846 /* SecondViewController.swift */; };
 		EBA232C41E24A96E003C7846 /* PopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA232C31E24A96E003C7846 /* PopAnimator.swift */; };
 		EBA232C61E25B60B003C7846 /* AViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBA232C51E25B60B003C7846 /* AViewController.swift */; };
+		EBED90E51E272F1E00264994 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBED90E41E272F1E00264994 /* Helper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		EBA232C11E249005003C7846 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		EBA232C31E24A96E003C7846 /* PopAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopAnimator.swift; sourceTree = "<group>"; };
 		EBA232C51E25B60B003C7846 /* AViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AViewController.swift; sourceTree = "<group>"; };
+		EBED90E41E272F1E00264994 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 				EBA232B81E248BCB003C7846 /* LaunchScreen.storyboard */,
 				EBA232BB1E248BCB003C7846 /* Info.plist */,
 				EB9CEE9C1E27164E009C16EB /* WeekviewTableViewCell.swift */,
+				EBED90E41E272F1E00264994 /* Helper.swift */,
 			);
 			path = "testing-hero";
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB9CEE9D1E27164E009C16EB /* WeekviewTableViewCell.swift in Sources */,
+				EBED90E51E272F1E00264994 /* Helper.swift in Sources */,
 				EBA232C21E249005003C7846 /* SecondViewController.swift in Sources */,
 				EBA232B21E248BCB003C7846 /* ViewController.swift in Sources */,
 				EBA232C41E24A96E003C7846 /* PopAnimator.swift in Sources */,

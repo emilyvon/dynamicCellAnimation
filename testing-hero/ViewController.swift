@@ -8,8 +8,6 @@
 
 import UIKit
 
-let uicolorArr = [UIColor.blue, UIColor.green, UIColor.brown, UIColor.cyan, UIColor.yellow, UIColor.orange, UIColor.magenta]
-
 extension CGFloat {
     
     static func random() -> CGFloat {
@@ -40,19 +38,52 @@ class ViewController: UIViewController {
     
     var cellRectBeforeExpanding: CGRect!
     
+    let weekdayArr = [5, 6, 7, 1, 2, 3, 4]
+    let taskNoArr = [0, 1, 1, 1, 2, 3, 4]
+    let daysInRow = 2 // unfinished/current active task no
+    
+    var isScrolled = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        tableView.dataSource = self
-        tableView.delegate = self
         
-        tableView.layoutMargins = UIEdgeInsets.zero
-        tableView.separatorStyle = .none
-        
-        
+        setupCurrentActiveTask(withIndex: daysInRow)
+        setupTableView()
     }
     
+    func setupCurrentActiveTask(withIndex num: Int) {
+//        var currentActiveIndexArr = [Int]()
+//        
+//        for item in weekdayArr {
+//            
+//            if item != 1 && item != 7 {
+//                
+//                currentActiveIndexArr.append(item)
+//           
+//                if currentActiveIndexArr.count == daysInRow + 1 {
+//                    break
+//                }
+//            }
+//            
+//        }
+//        
+//        print("currentActiveIndex: \(currentActiveIndexArr.last!)")
+        
+        // get the index of the value = 3 in taskNoArr
+        let index = taskNoArr.index(of: daysInRow)!
+        
+        
+        currentSelectedCell = index
+        previousSelectedCell = index
+    }
     
+    func setupTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.backgroundColor = UIColor(red: 251/255, green: 251/255, blue: 251/255, alpha: 1.0)
+        tableView.layoutMargins = UIEdgeInsets.zero
+        tableView.separatorStyle = .none
+    }
     
 }
 
@@ -70,7 +101,7 @@ extension ViewController: UITableViewDataSource {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "WeekviewCell") as! WeekviewTableViewCell
         cell.selectionStyle = .none
-        
+        cell.configureCell(weekdayNo: weekdayArr[indexPath.row], currentActiveTaskNo: daysInRow, taskNo: taskNoArr[indexPath.row])
         
         return cell
     }
@@ -83,7 +114,9 @@ extension ViewController: UITableViewDataSource {
         else if isSameSelectedCell && currentSelectedCell == indexPath.row {
             return self.view.frame.size.height
         }
-            
+        else if currentSelectedCell == indexPath.row {
+            return 343
+        }
         else {
             return 130
         }
@@ -100,9 +133,7 @@ extension ViewController: UITableViewDelegate {
         print("index: \(indexPath.row)")
         selectedIndexPath = indexPath
         
-        //        let selctedIndexRow = indexPath.row
-        
-        let selectedCell = tableView.cellForRow(at: indexPath)!
+        let selectedCell = tableView.cellForRow(at: indexPath) as! WeekviewTableViewCell
         
         currentSelectedCell = indexPath.row
         
@@ -159,8 +190,14 @@ extension ViewController: UITableViewDelegate {
     }
     
     
-    
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if !isScrolled {
+            tableView.scrollToRow(at: IndexPath(row: currentSelectedCell, section: 0), at: UITableViewScrollPosition.middle, animated: true)
+            isScrolled = true
+        }
+        
+    }
     
     
 }
@@ -175,7 +212,7 @@ extension ViewController: UIViewControllerTransitioningDelegate {
             
             self.isSameSelectedCell = false
             
-            self.previousSelectedCell = -1
+            self.previousSelectedCell = self.currentSelectedCell
             
             let selectedCell = self.tableView.cellForRow(at: IndexPath(row: self.currentSelectedCell, section: 0))!
             
@@ -188,7 +225,9 @@ extension ViewController: UIViewControllerTransitioningDelegate {
             
             
             self.tableView.scrollToRow(at: IndexPath(row: self.currentSelectedCell, section: 0), at: UITableViewScrollPosition.middle, animated: true)
+            
         }
+        
         
         return transition
     }
