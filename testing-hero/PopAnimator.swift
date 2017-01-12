@@ -10,7 +10,7 @@ import UIKit
 
 class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    let duration    = 1.0
+    let duration    = 0.3
     var presenting  = true
     var originFrame = CGRect.zero
     var isExpanding = false
@@ -21,17 +21,26 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        
-        
         let containerView = transitionContext.containerView
         let toView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
         let herbView = presenting ? toView : transitionContext.view(forKey: UITransitionContextViewKey.from)!
         
-        if isExpanding {
-            herbView.alpha = 0
-        } else {
+        /*
+        // testing
+        let maskLayer = CALayer()
+        maskLayer.backgroundColor = UIColor.yellow.cgColor
+        maskLayer.frame = CGRect(x: 50, y: 50, width: 100, height: 100)
+        */
+        
+        
+//        if isExpanding {
+//            herbView.alpha = 0
+//        } else {
             herbView.alpha = 1
-        }
+        
+//            herbView.layer.mask = maskLayer
+            
+//        }
         
         let initialFrame = presenting ? originFrame : herbView.frame
         let finalFrame = presenting ? herbView.frame : originFrame
