@@ -10,7 +10,7 @@ import UIKit
 
 class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    let duration    = 0.3
+    let duration    = 3.0
     var presenting  = true
     var originFrame = CGRect.zero
     var isExpanding = false
@@ -22,8 +22,35 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
         let containerView = transitionContext.containerView
-        let toView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
-        let herbView = presenting ? toView : transitionContext.view(forKey: UITransitionContextViewKey.from)!
+        
+        let fromController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
+        let toController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
+        
+        containerView.insertSubview(toController.view, belowSubview: fromController.view)
+        
+        if let weekviewController = fromController as? ViewController {
+            let tableView = weekviewController.tableView!
+            let selectedIndexPath = tableView.indexPathForSelectedRow!
+            let selectedCell = tableView.cellForRow(at: selectedIndexPath)!
+            
+            tableView.backgroundColor = UIColor.clear
+            fromController.view.backgroundColor = UIColor.clear
+            selectedCell.alpha = 0
+            
+            let selectedRowRelativeToVisibleCells = relativeRowInTableView(tableView: tableView, visibleCell: selectedCell)
+            
+            let topCellCount = selectedRowRelativeToVisibleCells
+            
+            let bottomCellCount = tableView.visibleCells.count - 1 - selectedRowRelativeToVisibleCells
+            
+            let topDistance = topCellCount * 130
+            let bottomDistance = bottomCellCount * 130
+            
+            
+        }
+        
+//        let toView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
+//        let fromView = presenting ? toView : transitionContext.view(forKey: UITransitionContextViewKey.from)!
         
         /*
         // testing
@@ -36,52 +63,56 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 //        if isExpanding {
 //            herbView.alpha = 0
 //        } else {
-            herbView.alpha = 1
+//            fromView.alpha = 1
         
 //            herbView.layer.mask = maskLayer
             
 //        }
         
-        let initialFrame = presenting ? originFrame : herbView.frame
-        let finalFrame = presenting ? herbView.frame : originFrame
-        
-        let xScaleFactor = presenting ?
-            initialFrame.width / finalFrame.width :
-            finalFrame.width / initialFrame.width
-        
-        let yScaleFactor = presenting ?
-            initialFrame.height / finalFrame.height :
-            finalFrame.height / initialFrame.height
-        
-        let scaleTransform = CGAffineTransform(scaleX: xScaleFactor, y: yScaleFactor)
+//        let initialFrame = presenting ? originFrame : fromView.frame
+//        let finalFrame = presenting ? fromView.frame : originFrame
+//        
+//        let xScaleFactor = presenting ?
+//            initialFrame.width / finalFrame.width :
+//            finalFrame.width / initialFrame.width
+//        
+//        let yScaleFactor = presenting ?
+//            initialFrame.height / finalFrame.height :
+//            finalFrame.height / initialFrame.height
+//        
+//        let scaleTransform = CGAffineTransform(scaleX: xScaleFactor, y: yScaleFactor)
         
         if presenting {
-            herbView.transform = scaleTransform
-            herbView.center = CGPoint(
-                x: initialFrame.midX,
-                y: initialFrame.midY)
-            herbView.clipsToBounds = true
+//            fromView.transform = scaleTransform
+//            fromView.center = CGPoint(
+//                x: initialFrame.midX,
+//                y: initialFrame.midY)
+//            fromView.clipsToBounds = true
         }
         
-        containerView.addSubview(toView)
-        containerView.bringSubview(toFront: herbView)
+        //        containerView.addSubview(toView)
+        //        containerView.bringSubview(toFront: fromView)
+        
+        
+        
+
         
         UIView.animate(withDuration: duration, delay:0.0,
                        usingSpringWithDamping: 1.0,
                        initialSpringVelocity: 0.0,
                        options: [.curveLinear],
                        animations: {
-                        herbView.transform = self.presenting ?
+                        fromView.transform = self.presenting ?
                             CGAffineTransform.identity : scaleTransform
                         
                         
-                        herbView.center = CGPoint(x: finalFrame.midX,
+                        fromView.center = CGPoint(x: finalFrame.midX,
                                                   y: finalFrame.midY)
                         
                         if self.isExpanding {
-                            herbView.alpha = 1
+                            fromView.alpha = 1
                         } else {
-                            herbView.alpha = 0
+                            fromView.alpha = 0
                         }
                         
         }, completion:{_ in
@@ -89,6 +120,21 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             transitionContext.completeTransition(true)
         })
         
+    }
+ 
+    
+    private func relativeRowInTableView(tableView: UITableView, visibleCell: UITableViewCell) -> Int {
+        
+        var row = 0
+        
+        for cell in tableView.visibleCells {
+            
+            if cell == visibleCell {
+                return row
+            }
+            row += 1
+        }
+        return row
     }
     
 }
